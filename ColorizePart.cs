@@ -11,7 +11,7 @@ namespace myspace
     {        
         static void Main()
         {
-            colorizeParts("121,123,126")
+            colorizeParts("121,123,126");
         }
         
         static void colorizeParts(string Phasestring)
