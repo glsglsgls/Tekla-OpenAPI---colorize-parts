@@ -18,7 +18,7 @@ namespace myspace
         {   //Will apply colour to parts in Tekla model
             //
             List<ModelObject> visibleParts = new List<ModelObject>();
-            visibleParts = getPartsFromView(Phasestring); //or you can choose other method to get parts from Tekla model
+            visibleParts = getPartsFromActiveView(Phasestring); //or you can choose other method to get parts from Tekla model
             MessageBox.Show($"Objects in phase: {Convert.ToString(visibleParts.Count)}");
             ModelObjectVisualization.SetTemporaryState(visibleParts, new Color(1, 0, 0));
         }
