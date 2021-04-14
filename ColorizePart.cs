@@ -50,6 +50,16 @@ namespace myspace
             return visibleParts;
         }
         
+        static List<ModelObject> getDetailsByRequestFromUser()
+        {
+                Tekla.Structures.Model.UI.Picker picker = new Tekla.Structures.Model.UI.Picker();
+                var Parts = picker.PickObjects(Picker.PickObjectsEnum.PICK_N_OBJECTS, "Pick Model Objects");
+                List<ModelObject> PartsList = new List<ModelObject>();
+                foreach(ModelObject part in Parts)
+                {PartsList.Add(part);}
+                return PartsList;
+        }
+            
         static List<ModelObject> getPartsFromActiveView(string PhaseString) //with Phase filter
         {   List<ModelObject> visibleParts = new List<ModelObject>();
             Tekla.Structures.Model.UI.ModelViewEnumerator views = Tekla.Structures.Model.UI.ViewHandler.GetVisibleViews();
@@ -68,7 +78,8 @@ namespace myspace
             else
             {   while (allObjects.MoveNext())
                 {  if (allObjects.Current is Tekla.Structures.Model.Part)     
-                    {   int phaseNumber = 0;
+                    {   //get phase number for current part
+                        int phaseNumber = 0;
                         allObjects.Current.GetReportProperty("PHASE", ref phaseNumber);
                         if(PhaseString.Contains(Convert.ToString(phaseNumber))) {visibleParts.Add(allObjects.Current); } 
                     }
